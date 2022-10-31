@@ -1,13 +1,13 @@
 @description('Resources location')
 // param location string = resourceGroup().location
 
-param location string 
+param location string = 'eastus'
 
 //----------- Storage Account Parameters ------------
 @description('Function Storage Account name')
 @minLength(3)
 @maxLength(24)
-param storageAccountName string
+param storageAccountName string = 'stgoiuop'
 
 @description('Function Storage Account SKU')
 @allowed([
@@ -28,14 +28,14 @@ param applicationInsightsName string
 
 //----------- Function App Parameters ------------
 @description('Function App Plan name')
-param planName string
+param planName string = 'asp-poi'
 
 @description('Function App Plan operating system')
 @allowed([
   'Windows'
   'Linux'
 ])
-param planOS string
+param planOS string = 'Windows'
 
 @description('Function App name')
 param functionAppName string
@@ -54,11 +54,11 @@ param apiManagementServiceName string = 'apiservice${uniqueString(resourceGroup(
 
 @description('The email address of the owner of the service')
 @minLength(1)
-param publisherEmail string
+param publisherEmail string = 'hrushikesh.yalavarthi@outlook.com'
 
 @description('The name of the owner of the service')
 @minLength(1)
-param publisherName string
+param publisherName string = 'Hrushikesh'
 
 
 
