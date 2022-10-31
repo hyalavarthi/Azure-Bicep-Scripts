@@ -58,7 +58,7 @@ param publisherEmail string = 'hrushikesh.yalavarthi@outlook.com'
 
 @description('The name of the owner of the service')
 @minLength(1)
-param publisherName string = 'Hrushikesh'
+param publisherName string = 'Hrushikesh Y'
 
 
 
