@@ -24,7 +24,7 @@ param storageAccountSku string = 'Standard_LRS'
 
 //----------- Application Insights Parameters ------------
 @description('Application Insights name')
-param applicationInsightsName string
+param applicationInsightsName string = 'apiinghtsfortest'
 
 //----------- Function App Parameters ------------
 @description('Function App Plan name')
