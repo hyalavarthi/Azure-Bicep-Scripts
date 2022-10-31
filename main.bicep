@@ -38,7 +38,7 @@ param planName string = 'asp-poi'
 param planOS string = 'Windows'
 
 @description('Function App name')
-param functionAppName string
+param functionAppName string = 'funapptestforpro'
 
 @description('Function App runtime')
 @allowed([
