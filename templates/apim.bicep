@@ -1,5 +1,6 @@
 @description('The name of the API Management service instance')
-param apiManagementServiceName string = 'apiservice${uniqueString(resourceGroup().id)}'
+// param apiManagementServiceName string = 'apiservice${uniqueString(resourceGroup().id)}'
+param apiManagementServiceName string = 'apiservicefortestprohbc'
 
 @description('The email address of the owner of the service')
 @minLength(1)
