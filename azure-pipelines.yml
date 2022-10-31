@@ -11,7 +11,12 @@ trigger:
 variables:
   resourceGroupName: 'RG-Practise-Cloud'
   location: 'eastus'
-
+  applicationInsightsName: 'ap-poiu'
+  functionAppName: 'funapp-oiuy'
+  planName: 'asp-poiu'
+  planOS: 'windows'
+ 
+ 
   templateFile: 'main.bicep'
 
 pool:
