@@ -11,13 +11,9 @@ trigger:
 variables:
   resourceGroupName: 'RG-Practise-Cloud'
   location: 'eastus'
-  applicationInsightsName: 'ap-poiu'
+  
   functionAppName: 'funapp-oiuy'
-  planName: 'asp-poiu'
-  planOS: 'windows'
-  publisherEmail: 'hrushikesh.yalavarthi@outlook.com'
-  publisherName': 'Hrushikesh'
-  storageAccountName: 'sthyuiforte'
+  
 
  
  
@@ -39,8 +35,7 @@ steps:
             az group create --name $(resourceGroupName) --location $(location)
             az deployment group what-if --resource-group $(resourceGroupName) \
                --template-file $(templateFile) \
-               --parameters 'applicationInsightsName=$(applicationInsightsName) functionAppName=$(functionAppName) location=$(location) planName=$(planName) planOS=$(planOS) publisherEmail=$(publisherEmail) publisherName=$(publisherName) storageAccountName=$(storageAccountName)'
- 
+               --parameters functionAppName=$(functionAppName)
 
 - task: AzureCLI@2
   displayName: Deploy Bicep Scripts To Azure
@@ -51,7 +46,7 @@ steps:
     inlineScript: |
       az deployment group create --resource-group $(resourceGroupName) \
                      --template-file $(templateFile)
-                     --parameters 'applicationInsightsName=$(applicationInsightsName) functionAppName=$(functionAppName) location=$(location) planName=$(planName) planOS=$(planOS) publisherEmail=$(publisherEmail) publisherName=$(publisherName) storageAccountName=$(storageAccountName)'
+                     --parameters functionAppName=$(functionAppName) 
 
 
 
