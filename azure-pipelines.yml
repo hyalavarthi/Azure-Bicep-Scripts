@@ -23,6 +23,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+
 - task: AzureCLI@2
   displayName: Preview Bicep Changes
   inputs:
@@ -31,9 +32,10 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az --version
-      az group create --name $(resourceGroupName) --location $(location)
-      az deployment group what-if --resource-group $(resourceGroupName) \
-         --template-file $(templateFile)
+            az group create --name $(resourceGroupName) --location $(location)
+            az deployment group what-if --resource-group $(resourceGroupName) \
+               --template-file $(templateFile)
+    arguments: 'applicationInsightsName=$(applicationInsightsName) functionAppName=$(functionAppName) location=$(location) planName=$(planName) planOS=$(planOS) publisherEmail=$(publisherEmail) publisherName=$(publisherName) storageAccountName=$(storageAccountName)'
 
 - task: AzureCLI@2
   displayName: Deploy Bicep Scripts To Azure
@@ -43,8 +45,10 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az deployment group create --resource-group $(resourceGroupName) \
-               --template-file $(templateFile) \
-               --parameters webAppName=$(webAppName)
+                     --template-file $(templateFile)
+    arguments: '''applicationInsightsName=$(applicationInsightsName) functionAppName=$(functionAppName) location=$(location) planName=$(planName) planOS=$(planOS) publisherEmail=$(publisherEmail) publisherName=$(publisherName) storageAccountName=$(storageAccountName)'''
+
+
             
 
 
