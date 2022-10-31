@@ -1,0 +1,60 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: Deploy Bicep files
+
+trigger: 
+ - master
+
+variables:
+  resourceGroupName: 'RG-Practise-Cloud'
+  location: 'eastus'
+  applicationInsightsName: 'ap-poiu'
+  functionAppName: 'funapp-oiuy'
+  planName: 'asp-poiu'
+  planOS: 'windows'
+  publisherEmail: 'hrushikesh.yalavarthi@outlook.com'
+  publisherName': 'Hrushikesh'
+  storageAccountName: 'sthyuiforte'
+
+ 
+ 
+  templateFile: 'main.bicep'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: AzureCLI@2
+  displayName: Preview Bicep Changes
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(672a6f62-7924-4df6-83d4-51ca2bb0d99c)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az --version
+            az group create --name $(resourceGroupName) --location $(location)
+            az deployment group what-if --resource-group $(resourceGroupName) \
+               --template-file $(templateFile) \
+               --parameters 'applicationInsightsName=$(applicationInsightsName) functionAppName=$(functionAppName) location=$(location) planName=$(planName) planOS=$(planOS) publisherEmail=$(publisherEmail) publisherName=$(publisherName) storageAccountName=$(storageAccountName)'
+ 
+
+- task: AzureCLI@2
+  displayName: Deploy Bicep Scripts To Azure
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(672a6f62-7924-4df6-83d4-51ca2bb0d99c)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az deployment group create --resource-group $(resourceGroupName) \
+                     --template-file $(templateFile)
+                     --parameters 'applicationInsightsName=$(applicationInsightsName) functionAppName=$(functionAppName) location=$(location) planName=$(planName) planOS=$(planOS) publisherEmail=$(publisherEmail) publisherName=$(publisherName) storageAccountName=$(storageAccountName)'
+
+
+
+
+
+
